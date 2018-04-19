@@ -1,10 +1,10 @@
-package tests;
+package file_reader.tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import file_reader.EU4FileReader;
+import file_reader.file_reader.EU4FileReader;
 
 public class GetFileContentTest {
 

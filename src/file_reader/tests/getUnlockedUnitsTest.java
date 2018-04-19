@@ -1,4 +1,4 @@
-package tests;
+package file_reader.tests;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import file_reader.EU4FileReader;
+import file_reader.file_reader.EU4FileReader;
 
 public class getUnlockedUnitsTest {
 
