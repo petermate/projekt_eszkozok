@@ -7,12 +7,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import classes.Unit;
+import classes.UnitType;
+import file_reader.tests.GetFileContentTest;
+
 public class EU4FileReader {
 	
 	/**
-	 * Felsorolja a megadott elérési út alatt található fájlokat.
-	 * @param folder Elérési út, pl: "./assets/common"
-	 * @return A lista elemei az elérési úton található fájlok neve kiterjesztéssel.
+	 * Felsorolja a megadott elÃ©rÃ©si Ãºt alatt talÃ¡lhatÃ³ fÃ¡jlokat.
+	 * @param folder elÃ©rÃ©si Ãºt, pl: "./assets/common"
+	 * @return A lista elemei az elÃ©rÃ©si Ãºton talÃ¡lhatÃ³ fÃ¡jlok neve kiterjesztÃ©ssel.
 	 */
 	public List<String> listFilesForFolder(final File folder) {
 		List<String> returnList = new ArrayList<>();
@@ -28,9 +32,9 @@ public class EU4FileReader {
 	}
 	
 	/**
-	 * Visszaadja egy file tartalmát egy List-ben
-	 * @param fileName A fájl neve elérési úttal, pl: "./assets/common/technologies/mil.txt"
-	 * @return A lista elemei a fájlban található sorok.
+	 * Visszaadja egy file tartalmÃ¡t egy List-ben
+	 * @param fileName A fÃ¡jl neve elÃ©rÃ©si Ãºttal, pl: "./assets/common/technologies/mil.txt"
+	 * @return A lista elemei a fÃ¡jlban talÃ¡lhatÃ³ sorok.
 	 */
 	public List<String> getFileContent(String fileName) {
 		BufferedReader reader = null;
@@ -42,7 +46,8 @@ public class EU4FileReader {
 		    while ((line = reader.readLine()) != null) {
 		        list.add(line);
 		    }
-		} catch (IOException e) {
+		} catch (IOException e) { 
+		 	System.out.println("Nincs ilyen fajl");
 		    e.printStackTrace();
 		} finally {
 		    try {
@@ -56,9 +61,9 @@ public class EU4FileReader {
 	}
 	
 	/**
-	 * Visszaadja a megadott MIT-hez kapcsolódó összes elérhetõ egységet.
-	 * @param mit Military technology, a játék bemeneti paramétere
-	 * @return Visszaad egy listát az elérhetõ egységekrõl vagy null-t ha 0<mit<32 nem teljesül.
+	 * Visszaadja a megadott MIT-hez kapcsolÃ³dÃ³ Ã¶sszes elÃ©rhetÅ‘ egysÃ©get.
+	 * @param mit Military technology, a jÃ¡tÃ©k bemeneti paramÃ©tere
+	 * @return Visszaad egy listÃ¡t az elÃ©rhetÅ‘ egysÃ©gekrÅ‘l vagy null-t ha 0<mit<32 nem teljesÃ¼l.
 	 */
 	public List<String> getUnlockedUnits(int mit){
 		if(mit > 32 || mit < 1) {
@@ -81,5 +86,52 @@ public class EU4FileReader {
 		//System.out.println("ITT VEGZODIK");
 		return returnList;
 	}
+	
+	/**
+	 * Visszaadja a beadott txt-bÅ‘l kiolvasott unit-ot reprezentÃ¡lÃ³ instance-t
+	 * @param unitNameTxt A fÃ¡jl neve, amibÅ‘l a unitra vonatkozÃ³ attribÃºtomokat ki szeretnÃ©nk olvasni.
+	 * @return visszaad egy Unit unit-ot beÃ¡llÃ­tva.
+	 */
+	public Unit getUnitWithAttributes(String unitNameTxt) {
+		Unit unit = new Unit();
+		String src = ("./assets/common/units/" ) + unitNameTxt;
+		List<String> lines = getFileContent(src);
+		for (String line : lines) {
+			if(line.contains("=")) {
+				line.trim();
+				String value = line.split("=")[1].trim();
+				if(line.contains("unit_type")) {
+					unit.setUnitType(value);
+				}else if(line.contains("type")) {
+					if(value.equals("infantry")) {
+						unit.setType(UnitType.INFANTRY);
+					}else if(value.equals("cavalry")) {
+						unit.setType(UnitType.CAVALRY);
+					}else if(value.contains("artillery")) {
+						unit.setType(UnitType.ARTILLERY);
+					}else {
+						return null;
+					}
+				}else if(line.contains("maneuver")) {
+					unit.setManeuver(Integer.parseInt(value));
+				}else if(line.contains("offensive_morale")) {
+					unit.setOffensiveMorale(Integer.parseInt(value));
+				}else if(line.contains("defensive_morale")) {
+					unit.setDefensiveMorale(Integer.parseInt(value));
+				}else if(line.contains("defensive_fire")) {
+					unit.setDefensiveFire(Integer.parseInt(value));
+				}else if(line.contains("offensive_fire")) {
+					unit.setOffensiveFire(Integer.parseInt(value));
+				}else if(line.contains("defensive_shock")) {
+					unit.setDefensiveShock(Integer.parseInt(value));
+				}else if(line.contains("offensive_shock")) {
+					unit.setOffensiveShock(Integer.parseInt(value));
+				}
+			}
+		}
+		return unit;
+	}
+	
+	
 	
 }
