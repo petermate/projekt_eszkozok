@@ -1,9 +1,12 @@
 package classes;
 
+import java.util.Objects;
+
 public class Unit {
 
-	private String militaryGroup; 	//földrajzi elhelyezkedés
-	private UnitType type;			//tipus ARTILLERY, CAVALRY, INFANTRY
+	private String militaryGroup; 	//fÃ¶ldrajzi elhelyezkedÃ©s
+	private UnitType type;			//tÃ­pus ARTILLERY, CAVALRY, INFANTRY
+	private int maneuver;
 	private int offensiveMorale;
 	private int defensiveMorale;
 	private int offensiveFire;
@@ -11,16 +14,21 @@ public class Unit {
 	private int offensiveShock;
 	private int defensiveShock;
 	
-	public Unit(String militaryGroup, UnitType type, int offensiveMorale, int defensiveMorale, int offensiveFire,
+	public Unit(String militaryGroup, UnitType type, int maneuver, int offensiveMorale, int defensiveMorale, int offensiveFire,
 			int defensiveFire, int offensiveShock, int defensiveShock) {
 		this.militaryGroup = militaryGroup;
 		this.type = type;
+		this.maneuver = maneuver;
 		this.offensiveMorale = offensiveMorale;
 		this.defensiveMorale = defensiveMorale;
 		this.offensiveFire = offensiveFire;
 		this.defensiveFire = defensiveFire;
 		this.offensiveShock = offensiveShock;
 		this.defensiveShock = defensiveShock;
+	}
+	
+	public Unit() {
+
 	}
 
 	public String getUnitType() {
@@ -85,6 +93,43 @@ public class Unit {
 
 	public void setDefensiveShock(int defensiveShock) {
 		this.defensiveShock = defensiveShock;
-	}	
+	}
+	
+	public int getManeuver() {
+		return maneuver;
+	}
+
+	public void setManeuver(int maneuver) {
+		this.maneuver = maneuver;
+	}
+	
+	@Override
+	public String toString() {
+		return "" + this.militaryGroup + " " + this.type;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		// self check
+	    if (this == o)
+	        return true;
+	    // null check
+	    if (o == null)
+	        return false;
+	    // type check and cast
+	    if (getClass() != o.getClass())
+	        return false;
+	    Unit unit = (Unit) o;
+	    // field comparison
+	    return Objects.equals(maneuver, unit.maneuver)
+	            && Objects.equals(type, unit.type)
+	            && Objects.equals(militaryGroup, unit.militaryGroup)
+	            && Objects.equals(offensiveMorale, unit.offensiveMorale)
+	            && Objects.equals(defensiveMorale, unit.defensiveMorale)
+	            && Objects.equals(offensiveFire, unit.offensiveFire)
+	            && Objects.equals(defensiveFire, unit.defensiveFire)
+	            && Objects.equals(offensiveShock, unit.offensiveShock)
+	            && Objects.equals(defensiveShock, unit.defensiveShock);
+	}
 	
 }
