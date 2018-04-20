@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import classes.TechnologyModifier;
 import classes.Unit;
 import classes.UnitType;
 import file_reader.tests.GetFileContentTest;
@@ -133,5 +134,60 @@ public class EU4FileReader {
 	}
 	
 	
+	/**
+	 * Visszaadja a megadott MIT-hez tartozó military tech modifier-eket, vagyis azokat a konstansokat amik számítanak a csatában.
+	 * @param mit A MIT szintje. 0<mit<32
+	 * @return Visszaad egy TechnologyModifier instancet, aminek le lehet kérni a különböző értékeit a getterekkel.
+	 */
+	public TechnologyModifier getTechModifiers(int mit) {
+	  TechnologyModifier tm = new TechnologyModifier();
+	  List<String> lines = getFileContent("./assets/common/technologies/mil.txt");
+	  for ( String line : lines) {
+	    if(line.contains("# Tech " + (mit+1))) {
+	      break;
+	    }else if(line.contains("sprite_level")) {
+	      line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setLevel(Integer.parseInt(value));
+	    }else if(line.contains("land_morale")) {
+          line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setMorale(Double.parseDouble(value));
+        }else if(line.contains("military_tactics")) {
+          line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setTactics(Double.parseDouble(value));
+        }else if(line.contains("combat_width")) {
+          line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setCombatWidth(Integer.parseInt(value));
+        }else if(line.contains("infantry_shock")) {
+          line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setInfantryShock(Double.parseDouble(value));
+        }else if(line.contains("infantry_fire")) {
+          line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setInfantryFire(Double.parseDouble(value));
+        }else if(line.contains("cavalry_shock")) {
+          line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setCavalryShock(Double.parseDouble(value));
+        }else if(line.contains("cavalry_fire")) {
+          line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setCavalryFire(Double.parseDouble(value));
+        }else if(line.contains("artillery_shock")) {
+          line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setArtilleryShock(Double.parseDouble(value));
+        }else if(line.contains("artillery_fire")) {
+          line.trim();
+          String value = line.split("=")[1].trim();
+          tm.setArtilleryFire(Double.parseDouble(value));
+        }
+	  }
+	  return tm;
+	}
 	
 }
