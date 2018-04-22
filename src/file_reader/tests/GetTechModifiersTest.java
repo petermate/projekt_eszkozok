@@ -12,7 +12,6 @@ public class GetTechModifiersTest {
   @Test
   public void test() {
     TechnologyModifier tm = new TechnologyModifier();
-    tm.setLevel(1);
     tm.setInfantryFire(0.25);
     tm.setInfantryShock(0.2);
     tm.setCavalryShock(0.8);
