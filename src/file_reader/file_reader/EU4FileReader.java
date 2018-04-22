@@ -136,7 +136,7 @@ public class EU4FileReader {
 	
 	/**
 	 * Visszaadja a megadott MIT-hez tartozó military tech modifier-eket, vagyis azokat a konstansokat amik számítanak a csatában.
-	 * @param mit A MIT szintje. 0<mit<32
+	 * @param mit A MIT szintje. 0<=mit<=32
 	 * @return Visszaad egy TechnologyModifier instancet, aminek le lehet kérni a különböző értékeit a getterekkel.
 	 */
 	public TechnologyModifier getTechModifiers(int mit) {
@@ -145,10 +145,6 @@ public class EU4FileReader {
 	  for ( String line : lines) {
 	    if(line.contains("# Tech " + (mit+1))) {
 	      break;
-	    }else if(line.contains("sprite_level")) {
-	      line.trim();
-          String value = line.split("=")[1].trim();
-          tm.setLevel(Integer.parseInt(value));
 	    }else if(line.contains("land_morale")) {
           line.trim();
           String value = line.split("=")[1].trim();
@@ -185,7 +181,11 @@ public class EU4FileReader {
           line.trim();
           String value = line.split("=")[1].trim();
           tm.setArtilleryFire(Double.parseDouble(value));
-        }
+        }else if(line.contains("maneuver_value ")) {
+            line.trim();
+            String value = line.split("=")[1].trim();
+            tm.setFlankingRange(Double.parseDouble(value));
+          }
 	  }
 	  return tm;
 	}
