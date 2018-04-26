@@ -1,4 +1,6 @@
 test\java\getUnlockedUnitsTest.class
 test\java\GetFileContentTest.class
 test\java\GetUnitWithAttributesTest.class
+test\java\AllTests.class
+test\java\GetTechModifiersTest.class
 test\java\ListFilesForFolderTest.class
