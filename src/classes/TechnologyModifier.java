@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class TechnologyModifier {
   
-  public int level;
   public double morale;
   public double tactics;
   public int combatWidth;
@@ -17,25 +16,19 @@ public class TechnologyModifier {
   public double artilleryShock;
   
   public TechnologyModifier() {
-    this.level = 1;
-    this.morale = 1;
-    this.tactics = 1;
-    this.combatWidth = 1;
-    this.flankingRange = 1;
-    this.infantryFire = 1;
-    this.infantryShock = 1;
-    this.cavalryFire = 1;
-    this.cavalryShock = 1;
-    this.artilleryFire = 1;
-    this.artilleryShock = 1;
+    
+    this.morale = 0;
+    this.tactics = 0.5;
+    this.combatWidth = 15;
+    this.flankingRange = 0;
+    this.infantryFire = 0;
+    this.infantryShock = 0;
+    this.cavalryFire = 0;
+    this.cavalryShock = 0;
+    this.artilleryFire = 0;
+    this.artilleryShock = 0;
   }
   
-  public int getLevel() {
-    return level;
-  }
-  public void setLevel(int level) {
-    this.level += level;
-  }
   public double getMorale() {
     return morale;
   }
@@ -110,8 +103,7 @@ public class TechnologyModifier {
           return false;
       TechnologyModifier tm = (TechnologyModifier) o;
       // field comparison
-      return Objects.equals(level, tm.level)
-              && Objects.equals(morale, tm.morale)
+      return  Objects.equals(morale, tm.morale)
               && Objects.equals(tactics, tm.tactics)
               && Objects.equals(combatWidth, tm.combatWidth)
               && Objects.equals(flankingRange, tm.flankingRange)
