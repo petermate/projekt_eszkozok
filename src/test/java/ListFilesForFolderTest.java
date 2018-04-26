@@ -1,4 +1,4 @@
-package file_reader.tests;
+package test.java;
 
 import static org.junit.Assert.*;
 

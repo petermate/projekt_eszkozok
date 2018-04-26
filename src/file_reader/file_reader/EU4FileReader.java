@@ -9,7 +9,7 @@ import java.util.List;
 
 import classes.Unit;
 import classes.UnitType;
-import file_reader.tests.GetFileContentTest;
+import test.java.GetFileContentTest;
 
 public class EU4FileReader {
 	
