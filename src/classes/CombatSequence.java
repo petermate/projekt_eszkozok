@@ -76,7 +76,7 @@ public class CombatSequence {
 		for( int index=0; index < attackerArmy.combatWidth ; index ++) {
 			
 			Random r = new Random();
-		    diceRoll = Math.abs(r.nextInt()) % 10;
+		    diceRoll = Math.abs(r.nextInt(Integer.MAX_VALUE)) % 10;
 		    
 		    
 			firstRowAttack = new Casualty( attackerArmy.firstRow[index], defenderArmy.firstRow[index], terrainMod );

@@ -1,6 +1,8 @@
-test\java\getUnlockedUnitsTest.class
-test\java\GetFileContentTest.class
-test\java\GetUnitWithAttributesTest.class
-test\java\AllTests.class
 test\java\GetTechModifiersTest.class
 test\java\ListFilesForFolderTest.class
+test\java\CombatUnitTest.class
+test\java\getUnlockedUnitsTest.class
+test\java\GetFileContentTest.class
+test\java\CasualtyTest.class
+test\java\GetUnitWithAttributesTest.class
+test\java\AllTests.class
