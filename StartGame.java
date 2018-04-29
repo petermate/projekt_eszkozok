@@ -14,6 +14,7 @@ public class StartGame {
 	//private CombatUnit combatUnit1;
 	//private CombatUnit combatUnit2;
 	private int tech;
+	private int tech2;
 	private int stance;  //támadás vagy védekezés, lehet boolean is, ha kényelmesebb
 	private int regiments1;
 	private int regiments2;
@@ -74,7 +75,7 @@ public class StartGame {
 		EU4FileReader fr = new EU4FileReader();
 		List<String> list1 = fr.getUnlockedUnits(tech);		
 		for (int i = 0; i < list1.size(); i++) {
-			System.out.println(i+1 + ". " + list1.get(i) + " | ");		//csakhogy 1-től induljon a számozás
+			System.out.print(i+1 + ". " + list1.get(i) + " | ");		//csakhogy 1-től induljon a számozás
 		}
 		
 		int u1;
@@ -149,6 +150,88 @@ public class StartGame {
 		    }
 		    terrainMod = sc.nextInt();
 		} while (terrainMod < 0 || terrainMod > 2);
+		
+		//ellenség
+		
+		System.out.println("Add meg az ellenseges tabornok parametereit! \n Fire:");				
+		int f2;
+		do {
+			System.out.println("0 vagy nagyobb szamot adj meg!");
+		    while (!sc.hasNextInt()) {
+		        System.out.println("Szamot adj meg!");
+		        sc.next(); 
+		    }
+		    f2 = sc.nextInt();
+		} while (f2 < 0);		//itt le lehetne ellenőrizni, hogy a lehetséges értékeken belül legyen (nem tudom mennyi lehet a max., wikin sem találom
+		
+		System.out.println("Shock:");
+		int s2;
+		do {
+			System.out.println("0 vagy nagyobb szamot adj meg!");
+		    while (!sc.hasNextInt()) {
+		        System.out.println("Szamot adj meg!");
+		        sc.next(); 
+		    }
+		    s2 = sc.nextInt();
+		} while (s2 < 0);		//itt le lehetne ellenőrizni, hogy a lehetséges értékeken belül legyen (nem tudom mennyi lehet a max., wikin sem találom
+		
+		System.out.println("Maneuver:");
+		int m2;
+		do {
+			System.out.println("0 vagy nagyobb szamot adj meg!");
+		    while (!sc.hasNextInt()) {
+		        System.out.println("Szamot adj meg!");
+		        sc.next(); 
+		    }
+		    m2 = sc.nextInt();
+		} while (m2 < 0);		//itt le lehetne ellenőrizni, hogy a lehetséges értékeken belül legyen (nem tudom mennyi lehet a max., wikin sem találom
+		
+		leader2 = new Leader(f2, s2, m2);
+		System.out.println("Az altalad valasztott ellenseges tabornok: * Fire: " + f2 + " | Shock: " + s2 + " | Maneuver: " + m2 + " *");
+				
+		System.out.println("Add meg az ellenseges sereg military technology szintjet (0-32): ");
+		do {
+		    while (!sc.hasNextInt()) {
+		        System.out.println("Szamot adj meg!");
+		        sc.next(); 
+		    }
+		    tech2 = sc.nextInt();
+		} while (tech2 < 0 || tech2 > 32);
+		System.out.println("Az altalad valaszott szint: |" + tech2 + "| \n Az alabbi egysegek kozul valaszthatsz: ");
+		
+		List<String> list2 = fr.getUnlockedUnits(tech2);		
+		for (int i = 0; i < list2.size(); i++) {
+			System.out.print(i+1 + ". " + list2.get(i) + " | ");		//csakhogy 1-től induljon a számozás
+		}
+		
+		int u2;
+		do {
+		    while (!sc.hasNextInt()) {
+		        System.out.println("Szamot adj meg!");
+		        sc.next(); 
+		    }
+		    u2 = sc.nextInt();
+		} while (u2 <= 0 || u2 > list2.size()+1);
+		
+		System.out.println("Az altalad valaszott egyseg: | " + list2.get(u2-1) + " |");
+		Unit unit2 = fr.getUnitWithAttributes(list2.get(u2-1)+".txt");	//számozás miatt -1, ha nagyon zavaró kivehetjük az egészet és 0-tól indul
+		
+		/*System.out.println("Az altalad valaszott egyseg zsoldos? 0 = nem | 1 = igen");
+		int mercenary2 = sc.nextInt();
+		if (mercenary2 < 0 || mercenary2 > 1 ) {
+			System.out.println("Rossz szamot adtal meg!");
+		}
+		boolean isMercenary2;
+		if (Integer.parseInt(args[0]) == 0) {
+			isMercenary2 = false;
+		} else {
+			isMercenary2 = true;
+		}
+		 */
+		//InputModifier im2 = new InputModifier();		
+		//combatUnit2 = new CombatUnit(unit2, t2, im2, leader2, isMercenary2);	
+		
+		//ide jöhet a reprezentáció például
 				
 	}
 	
@@ -172,6 +255,10 @@ public class StartGame {
 	
 	public int getTech() {
 		return tech;
+	}
+	
+	public int getTech2() {
+		return tech2;
 	}
 	
 	public int getStance() {
