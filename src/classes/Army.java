@@ -55,9 +55,19 @@ public class Army {
 		
 		this.units = units;
 		
-		checkMoral( this.units );
-		splitUnits( this.units );		
-		deployUnitsToStartingPosition();
+					
+		try {
+			
+			checkMoral( this.units );
+			splitUnits( this.units );		
+			deployUnitsToStartingPosition();
+			
+        } catch (NullPointerException e) {
+        	
+            System.out.print("NullPointerException");
+        }
+		
+		
 		
 	}
 	 
@@ -66,6 +76,7 @@ public class Army {
 	}
 	
 	public void splitUnits( ArrayList<CombatUnit> units ) {
+		
 		
 		for( CombatUnit unit : units) {
 			
