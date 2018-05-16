@@ -29,6 +29,11 @@ public class StartGame {
 	private Army army1;
 	private Army army2;
 	
+	/*
+	* elindítja a programot és bekéri a paramétereket a felhasználótól
+	*/
+
+	
 	public void start() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("EU4 csataszimulátor teszt");
@@ -37,35 +42,35 @@ public class StartGame {
 		System.out.println("# Add meg a tabornokod parametereit! \n# Fire:");				
 		int f;
 		do {
-			System.out.println("0 vagy nagyobb szamot adj meg!");
+			System.out.println("0 es 6 kozotti szamot adj meg!");
 		    while (!sc.hasNextInt()) {
 		        System.out.println("Szamot adj meg!");
 		        sc.next(); 
 		    }
 		    f = sc.nextInt();
-		} while (f < 0);		//itt le lehetne ellenőrizni, hogy a lehetséges értékeken belül legyen (nem tudom mennyi lehet a max., wikin sem találom
+		} while (f < 0 || f > 6);		
 		
 		System.out.println("# Shock:");
 		int s;
 		do {
-			System.out.println("0 vagy nagyobb szamot adj meg!");
+			System.out.println("0 es 6 kozotti szamot adj meg!");
 		    while (!sc.hasNextInt()) {
 		        System.out.println("Szamot adj meg!");
 		        sc.next(); 
 		    }
 		    s = sc.nextInt();
-		} while (s < 0);		//itt le lehetne ellenőrizni, hogy a lehetséges értékeken belül legyen (nem tudom mennyi lehet a max., wikin sem találom
+		} while (s < 0 || s > 6);		
 		
 		System.out.println("# Maneuver:");
 		int m;
 		do {
-			System.out.println("0 vagy nagyobb szamot adj meg!");
+			System.out.println("0 es 6 kozotti szamot adj meg!");
 		    while (!sc.hasNextInt()) {
 		        System.out.println("Szamot adj meg!");
 		        sc.next(); 
 		    }
 		    m = sc.nextInt();
-		} while (m < 0);		//itt le lehetne ellenőrizni, hogy a lehetséges értékeken belül legyen (nem tudom mennyi lehet a max., wikin sem találom
+		} while (m < 0 || m > 6);		
 		
 		leader1 = new Leader(f, s, m);
 		System.out.println("# Az altalad valasztott tabornok: * Fire: " + f + " | Shock: " + s + " | Maneuver: " + m + " *");
@@ -129,9 +134,6 @@ public class StartGame {
 		}
 		*/
 		
-		// inputmodifier biztos, hogy minden UI-n jön? egyesével bekérjük a felhasználótól az összeset? azokat nem tech bónuszként kapjuk meg?
-		
-		//kövi a leírás szerint a miltiary group. Az is bemeneti paraméter? Az nem a unit txt-ben van minden egységhez?
 		
 				
 		System.out.println("\n# Add meg, hogy tamadsz vagy vedekezel! ");
@@ -156,7 +158,7 @@ public class StartGame {
 		} while (regiments1 < 0);
 		*/
 		
-		//unit type = ez a választott egységtől függ, amit kiolvasunk a txt-ből nem?
+		
 		
 		System.out.println("# Van folyo, amin a tamado seregnek at kell kelnie?");
 		do {
@@ -170,48 +172,48 @@ public class StartGame {
 		
 		System.out.println("# Add meg a terep tipusat!");
 		do {
-			System.out.println("0 = siksag | 1 = erdo | 2 = hegyek"); //nem tudom hany fajta van
+			System.out.println("0 = siksag | 1 = erdo | 2 = hegyek | 3 = dzsungel | 4 = dombok | 5 = mocsar | 6 = sivatag");
 		    while (!sc.hasNextInt()) {
 		        System.out.println("Szamot adj meg!");
 		        sc.next(); 
 		    }
 		    terrainMod = sc.nextInt();
-		} while (terrainMod < 0 || terrainMod > 2);
+		} while (terrainMod < 0 || terrainMod > 6);
 		
 		//ellenség
 		
 		System.out.println("# Add meg az ellenseges tabornok parametereit! \n# Fire:");				
 		int f2;
 		do {
-			System.out.println("0 vagy nagyobb szamot adj meg!");
+			System.out.println("0 es 6 kozotti szamot adj meg!");
 		    while (!sc.hasNextInt()) {
 		        System.out.println("Szamot adj meg!");
 		        sc.next(); 
 		    }
 		    f2 = sc.nextInt();
-		} while (f2 < 0);		//itt le lehetne ellenőrizni, hogy a lehetséges értékeken belül legyen (nem tudom mennyi lehet a max., wikin sem találom
+		} while (f2 < 0 || f2 > 6);		
 		
 		System.out.println("# Shock:");
 		int s2;
 		do {
-			System.out.println("0 vagy nagyobb szamot adj meg!");
+			System.out.println("0 es 6 kozotti szamot adj meg!");
 		    while (!sc.hasNextInt()) {
 		        System.out.println("Szamot adj meg!");
 		        sc.next(); 
 		    }
 		    s2 = sc.nextInt();
-		} while (s2 < 0);		//itt le lehetne ellenőrizni, hogy a lehetséges értékeken belül legyen (nem tudom mennyi lehet a max., wikin sem találom
+		} while (s2 < 0 || s2 > 6);		
 		
 		System.out.println("# Maneuver:");
 		int m2;
 		do {
-			System.out.println("0 vagy nagyobb szamot adj meg!");
+			System.out.println("0 es 6 kozotti szamot adj meg!");
 		    while (!sc.hasNextInt()) {
 		        System.out.println("Szamot adj meg!");
 		        sc.next(); 
 		    }
 		    m2 = sc.nextInt();
-		} while (m2 < 0);		//itt le lehetne ellenőrizni, hogy a lehetséges értékeken belül legyen (nem tudom mennyi lehet a max., wikin sem találom
+		} while (m2 < 0 || m2 > 6);		
 		
 		leader2 = new Leader(f2, s2, m2);
 		System.out.println("# Az altalad valasztott ellenseges tabornok: * Fire: " + f2 + " | Shock: " + s2 + " | Maneuver: " + m2 + " *");
@@ -266,8 +268,7 @@ public class StartGame {
 			enemyCombatUnits.add(new CombatUnit(un2, tm, im, leader2, isMercenary2));
 		}
 		
-		// itt elcrashel, mert az army osztályban nincsenek inicializálva a unittype listák, ha az is megvan akkor pedig végtelen ciklus / várakozik ?
-		
+				
 		army1 = new Army(leader1, 1, 1, userCombatUnits);  			// using dummy values for now
 		army2 = new Army(leader2, 1, 1, enemyCombatUnits);
 		
