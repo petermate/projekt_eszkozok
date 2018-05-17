@@ -7,10 +7,10 @@ import org.junit.runners.Suite.SuiteClasses;
 import test.java.GetFileContentTest;
 import test.java.GetUnitWithAttributesTest;
 import test.java.ListFilesForFolderTest;
-import test.java.getUnlockedUnitsTest;
+import test.java.GetUnlockedUnitsTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({GetUnitWithAttributesTest.class, GetFileContentTest.class, ListFilesForFolderTest.class, getUnlockedUnitsTest.class,
+@SuiteClasses({GetUnitWithAttributesTest.class, GetFileContentTest.class, ListFilesForFolderTest.class, GetUnlockedUnitsTest.class,
                 CasualtyTest.class, CombatUnitTest.class})
 public class AllTests {
 

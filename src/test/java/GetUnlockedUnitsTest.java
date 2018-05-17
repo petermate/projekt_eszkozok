@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import file_reader.file_reader.EU4FileReader;
 
-public class getUnlockedUnitsTest {
+public class GetUnlockedUnitsTest {
 
 	@Test
 	public void test() {

@@ -72,31 +72,50 @@ public class CombatSequence {
 		Casualty firstRowAttack;
 		Casualty secondRowAttack;
 		int diceRoll;
+		TechnologyModifier tm = new TechnologyModifier();
+        tm.setInfantryFire(0.25);
+        tm.setInfantryShock(0.2);
+        tm.setCavalryShock(0.8);
+        tm.setMorale(2.0);
+        tm.setInfantryShock(0.1);
+        tm.setInfantryFire(0.1);
+        tm.setInfantryShock(0.2);
+        tm.setCavalryShock(0.2);
+        tm.setCombatWidth(5);
 				
 		for( int index=0; index < attackerArmy.combatWidth ; index ++) {
+		    
+		    //Ezek mindig 0-ák voltak, majd szoroztunk velük, kérlek nézzétek meg hol kéne beállítódniuk.
+		    attackerArmy.firstRow[index].setFireMod(0.25);
+		    attackerArmy.firstRow[index].setShockMod(0.25);
+		    defenderArmy.firstRow[index].setFireMod(0.1);
+		    defenderArmy.firstRow[index].setShockMod(0.1);
 			
 			Random r = new Random();
 		    diceRoll = Math.abs(r.nextInt(Integer.MAX_VALUE)) % 10;
 		    
 		    
 			firstRowAttack = new Casualty( attackerArmy.firstRow[index], defenderArmy.firstRow[index], terrainMod );
-			firstRowAttack.Casualties( firstRowAttack.DiceRoll( diceRoll, phase ), phase );
+			int defCasualty = firstRowAttack.casualties( firstRowAttack.diceRoll( diceRoll, phase ), phase );
+			//Honnan kéne kitalálni, hogy a casualty melyik egység típusra érkezett? Infantry, cavalry vagy artillery?
+			this.defenderArmy.setNumberOfDeadInfantryUnit(defCasualty);
+			//Ide nem kéne morale veszteség is valahova? Hogy mert a harc során a morale sosem változik
 			
 			firstRowAttack = new Casualty( defenderArmy.firstRow[index], attackerArmy.firstRow[index], terrainMod );
-			firstRowAttack.Casualties( firstRowAttack.DiceRoll( diceRoll, phase ), phase );
-					
+			int attackerCasualty = firstRowAttack.casualties( firstRowAttack.diceRoll( diceRoll, phase ), phase );			
+			this.attackerArmy.setNumberOfDeadInfantryUnit(attackerCasualty);
 						
 			
-			if ( attackerArmy.secondRow[index].type.equals(UnitType.ARTILLERY) ) {
+			if (attackerArmy.secondRow[index]!= null && attackerArmy.secondRow[index].type.equals(UnitType.ARTILLERY) ) {
 				
 				secondRowAttack = new Casualty( attackerArmy.secondRow[index], defenderArmy.firstRow[index], terrainMod );
-				secondRowAttack.Casualties( secondRowAttack.DiceRoll( diceRoll, phase ), phase );
+				int defCasualtySecondRow = secondRowAttack.casualties( secondRowAttack.diceRoll( diceRoll, phase ), phase );
 				
 			}
-			if ( defenderArmy.secondRow[index].type.equals(UnitType.ARTILLERY) ) {
+			if (defenderArmy.secondRow[index]!= null && defenderArmy.secondRow[index].type.equals(UnitType.ARTILLERY) ) {
 				
 				secondRowAttack = new Casualty( defenderArmy.secondRow[index], attackerArmy.firstRow[index], terrainMod );
-				secondRowAttack.Casualties( secondRowAttack.DiceRoll( diceRoll, phase ), phase );
+				int attackerCasualtySecondRow = secondRowAttack.casualties( secondRowAttack.diceRoll( diceRoll, phase ), phase );
 			}
 			
 		}
@@ -107,20 +126,20 @@ public class CombatSequence {
 	
 	public boolean isBattleFinished() {
 		
-		int numberOfDeadUnitsInAttackerArmy = attackerArmy.NumberOfDeadArtilleryUnit + attackerArmy.NumberOfDeadInfantryUnit + attackerArmy.NumberOfDeadCavalryUnit;
-		int numberOfRetreatingUnitsInAttackerArmy = attackerArmy.NumberOfRetreatingInfantryUnit + attackerArmy.NumberOfRetreatingCavalryUnit + attackerArmy.NumberOfRetreatingArtilleryUnit;
+		int numberOfDeadUnitsInAttackerArmy = attackerArmy.numberOfDeadArtilleryUnit + attackerArmy.numberOfDeadInfantryUnit + attackerArmy.numberOfDeadCavalryUnit;
+		int numberOfRetreatingUnitsInAttackerArmy = attackerArmy.numberOfRetreatingInfantryUnit + attackerArmy.numberOfRetreatingCavalryUnit + attackerArmy.numberOfRetreatingArtilleryUnit;
 		
-		int numberOfDeadUnitsInDefenderArmy = defenderArmy.NumberOfDeadArtilleryUnit + defenderArmy.NumberOfDeadInfantryUnit + defenderArmy.NumberOfDeadCavalryUnit;
-		int numberOfRetreatingUnitsInDefenderArmy = defenderArmy.NumberOfRetreatingInfantryUnit + defenderArmy.NumberOfRetreatingCavalryUnit + defenderArmy.NumberOfRetreatingArtilleryUnit;
+		int numberOfDeadUnitsInDefenderArmy = defenderArmy.numberOfDeadArtilleryUnit + defenderArmy.numberOfDeadInfantryUnit + defenderArmy.numberOfDeadCavalryUnit;
+		int numberOfRetreatingUnitsInDefenderArmy = defenderArmy.numberOfRetreatingInfantryUnit + defenderArmy.numberOfRetreatingCavalryUnit + defenderArmy.numberOfRetreatingArtilleryUnit;
 		
-		if( numberOfDeadUnitsInAttackerArmy + numberOfRetreatingUnitsInAttackerArmy == attackerArmy.manpower ) {
+		if( numberOfDeadUnitsInAttackerArmy + numberOfRetreatingUnitsInAttackerArmy >= attackerArmy.manpower ) {
 						
-			attackerArmy.setIsWonBattle(true);
+		    defenderArmy.setIsWonBattle(true);
 			return true;			
 		}
-		else if( numberOfDeadUnitsInDefenderArmy + numberOfRetreatingUnitsInDefenderArmy == defenderArmy.manpower ) {
+		else if( numberOfDeadUnitsInDefenderArmy + numberOfRetreatingUnitsInDefenderArmy >= defenderArmy.manpower ) {
 			
-			defenderArmy.setIsWonBattle(true);
+			attackerArmy.setIsWonBattle(true);
 			return true;
 		}
 		

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import classes.TechnologyModifier;
@@ -21,15 +22,19 @@ public class EU4FileReader {
 	 */
 	public List<String> listFilesForFolder(final File folder) {
 		List<String> returnList = new ArrayList<>();
-	    for (final File fileEntry : folder.listFiles()) {
-	        if (fileEntry.isDirectory()) {
-	            listFilesForFolder(fileEntry);
-	        } else {
-	            //System.out.println(fileEntry.getName());
-	            returnList.add(fileEntry.getName().trim());
-	        }
-	    }
+		    for (final File fileEntry : safe(folder.listFiles())) {
+	            if (fileEntry.isDirectory()) {
+	                listFilesForFolder(fileEntry);
+	            } else {
+	                //System.out.println(fileEntry.getName());
+	                returnList.add(fileEntry.getName().trim());
+	            }
+	        }    
 	    return returnList;
+	}
+	
+	public static File[] safe( File[] other ) {
+	    return other == null ? new File[0] : other;
 	}
 	
 	/**
@@ -52,7 +57,9 @@ public class EU4FileReader {
 		    e.printStackTrace();
 		} finally {
 		    try {
-		        reader.close();
+		        if(reader!=null) {
+		            reader.close();
+		        }
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		    }
@@ -79,7 +86,7 @@ public class EU4FileReader {
 				break;
 			}
 			if(line.contains("enable")) {
-				line.trim();
+			    line = line.trim();
 				String[] lineArray = line.split("=");
 				returnList.add(lineArray[1].trim());
 			}
@@ -99,7 +106,7 @@ public class EU4FileReader {
 		List<String> lines = getFileContent(src);
 		for (String line : lines) {
 			if(line.contains("=")) {
-				line.trim();
+				line = line.trim();
 				String value = line.split("=")[1].trim();
 				if(line.contains("unit_type")) {
 					unit.setUnitType(value);

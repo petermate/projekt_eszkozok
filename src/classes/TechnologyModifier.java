@@ -114,5 +114,11 @@ public class TechnologyModifier {
               && Objects.equals(artilleryFire, tm.artilleryFire)
               && Objects.equals(artilleryShock, tm.artilleryShock);
   }
+  
+  @Override
+  public int hashCode() {
+      assert false : "hashCode not designed";
+      return 42; // any arbitrary constant will do
+  }
 
 }

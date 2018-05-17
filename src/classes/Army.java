@@ -1,6 +1,7 @@
 package classes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Army {
 	
@@ -21,12 +22,12 @@ public class Army {
 	CombatUnit[] secondRow;
 	
 	public int numberOfSpareUnit; //tartalékok száma
-	public int NumberOfDeadInfantryUnit;
-	public int NumberOfDeadCavalryUnit;
-	public int NumberOfDeadArtilleryUnit;
-	public int NumberOfRetreatingInfantryUnit;
-	public int NumberOfRetreatingCavalryUnit;
-	public int NumberOfRetreatingArtilleryUnit;
+	public int numberOfDeadInfantryUnit;
+	public int numberOfDeadCavalryUnit;
+	public int numberOfDeadArtilleryUnit;
+	public int numberOfRetreatingInfantryUnit;
+	public int numberOfRetreatingCavalryUnit;
+	public int numberOfRetreatingArtilleryUnit;
 	
 	
 	public Army( Leader leader, int combatWidth, int cavalryPositionValueInOneSide, ArrayList<CombatUnit> units) {
@@ -38,12 +39,12 @@ public class Army {
 		this.cavalryPositionValueInOneSide = cavalryPositionValueInOneSide;
 		
 		this.numberOfSpareUnit = 0;
-		this.NumberOfDeadInfantryUnit = 0;
-		this.NumberOfDeadCavalryUnit = 0;
-		this.NumberOfDeadArtilleryUnit = 0;		
-		this.NumberOfRetreatingInfantryUnit = 0;
-		this.NumberOfRetreatingCavalryUnit = 0;
-		this.NumberOfRetreatingArtilleryUnit = 0;
+		this.numberOfDeadInfantryUnit = 0;
+		this.numberOfDeadCavalryUnit = 0;
+		this.numberOfDeadArtilleryUnit = 0;		
+		this.numberOfRetreatingInfantryUnit = 0;
+		this.numberOfRetreatingCavalryUnit = 0;
+		this.numberOfRetreatingArtilleryUnit = 0;
 		
 		this.isWonBattle = false;
 				
@@ -52,6 +53,9 @@ public class Army {
 		
 		
 		this.units = new ArrayList<CombatUnit>();
+		this.unitsOfArtillery = new ArrayList<>();
+		this.unitsOfCavalry = new ArrayList<>();
+		this.unitsOfInfantry = new ArrayList<>();
 		
 		this.units = units;
 		
@@ -108,15 +112,15 @@ public class Army {
 				
 				if( unit.type.equals(UnitType.INFANTRY) ) {
 					
-					NumberOfRetreatingInfantryUnit++;
+					numberOfRetreatingInfantryUnit++;
 				}
 				else if( unit.type.equals(UnitType.CAVALRY) ) {
 					
-					NumberOfRetreatingCavalryUnit++;
+					numberOfRetreatingCavalryUnit++;
 				}
 				else if( unit.type.equals(UnitType.ARTILLERY) ) {
 					
-					NumberOfRetreatingArtilleryUnit++;
+					numberOfRetreatingArtilleryUnit++;
 				}
 				
 			}
@@ -173,7 +177,7 @@ public class Army {
 			}
 			
 		}			
-		else if( ( row.equals(secondRow) ) && ( ( index >  artilleryIndexBegin ) || ( index < ( artilleryIndexBegin + unitsOfArtillery.size() ) ) ) ) {
+		else if( ( Arrays.equals(row, secondRow) ) && ( ( index >  artilleryIndexBegin ) || ( index < ( artilleryIndexBegin + unitsOfArtillery.size() ) ) ) ) {
 			
 			if( !unitsOfArtillery.isEmpty() ) {
 				
@@ -212,7 +216,7 @@ public class Army {
 			
 			if( unit.getType().equals(UnitType.CAVALRY) ) {
 				
-				NumberOfRetreatingCavalryUnit++;
+				numberOfRetreatingCavalryUnit++;
 				
 				if( !unitsOfCavalry.isEmpty() ) {
 					
@@ -233,7 +237,7 @@ public class Army {
 			}
 			else if( unit.getType().equals(UnitType.INFANTRY) ) {
 				
-				NumberOfRetreatingInfantryUnit++;
+				numberOfRetreatingInfantryUnit++;
 				
 				if( !unitsOfInfantry.isEmpty() ) {
 					
@@ -255,7 +259,7 @@ public class Army {
 			}
 			else if( unit.getType().equals(UnitType.ARTILLERY) ) {
 				
-				NumberOfRetreatingArtilleryUnit++;
+				numberOfRetreatingArtilleryUnit++;
 				
 				if( !unitsOfInfantry.isEmpty() ) {
 					
@@ -292,7 +296,7 @@ public class Army {
 					
 			}	
 			
-			if( secondRow[indexRow].getMorale() == 0) {
+			if( secondRow[indexRow] != null && secondRow[indexRow].getMorale() == 0) {
 				
 				getNewUnitForPosition( secondRow[indexRow] );
 			}
@@ -349,62 +353,62 @@ public class Army {
 	
 	public int getNumberOfDeadInfantryUnit() {
 		
-		return NumberOfDeadInfantryUnit;
+		return numberOfDeadInfantryUnit;
 	}
 	
 	public int getNumberOfDeadCavalryUnit() {
 		
-		return NumberOfDeadCavalryUnit; 
+		return numberOfDeadCavalryUnit; 
 	}
 	
 	public int getNumberOfDeadArtilleryUnit() {
 		
-		return NumberOfDeadArtilleryUnit;
+		return numberOfDeadArtilleryUnit;
 	}
 	
 	public int getNumberOfRetreatingInfantryUnit() {
 		
-		return NumberOfRetreatingInfantryUnit;
+		return numberOfRetreatingInfantryUnit;
 	}
 	
 	public int getNumberOfRetreatingCavalryUnit() {
 		
-		return NumberOfRetreatingCavalryUnit;
+		return numberOfRetreatingCavalryUnit;
 	}
 	
 	public int getNumberOfRetreatingArtilleryUnit() {
 		
-		return NumberOfRetreatingArtilleryUnit;
+		return numberOfRetreatingArtilleryUnit;
 	}
 	
 	public void setNumberOfDeadInfantryUnit( int NumberOfDeadInfantryUnit ) {
 		
-		this.NumberOfDeadInfantryUnit = NumberOfDeadInfantryUnit;
+		this.numberOfDeadInfantryUnit += NumberOfDeadInfantryUnit;
 	}
 	
 	public void setNumberOfDeadCavalryUnit( int NumberOfDeadCavalryUnit ) {
 		
-		this.NumberOfDeadCavalryUnit = NumberOfDeadCavalryUnit; 
+		this.numberOfDeadCavalryUnit += NumberOfDeadCavalryUnit; 
 	}
 	
 	public void setNumberOfDeadArtilleryUnit( int NumberOfDeadArtilleryUnit ) {
 		
-		this.NumberOfDeadArtilleryUnit = NumberOfDeadArtilleryUnit;
+		this.numberOfDeadArtilleryUnit += NumberOfDeadArtilleryUnit;
 	}
 	
 	public void setNumberOfRetreatingInfantryUnit( int NumberOfRetreatingInfantryUnit ) {
 		
-		this.NumberOfRetreatingInfantryUnit = NumberOfRetreatingInfantryUnit;
+		this.numberOfRetreatingInfantryUnit = NumberOfRetreatingInfantryUnit;
 	}
 	
 	public void setNumberOfRetreatingCavalryUnit( int NumberOfRetreatingCavalryUnit ) {
 		
-		this.NumberOfRetreatingCavalryUnit = NumberOfRetreatingCavalryUnit;
+		this.numberOfRetreatingCavalryUnit = NumberOfRetreatingCavalryUnit;
 	}
 	
 	public void setNumberOfRetreatingArtilleryUnit( int NumberOfRetreatingArtilleryUnit ) {
 		
-		this.NumberOfRetreatingArtilleryUnit = NumberOfRetreatingArtilleryUnit;
+		this.numberOfRetreatingArtilleryUnit = NumberOfRetreatingArtilleryUnit;
 	}
 	
 	public boolean getIsWonBattle() {

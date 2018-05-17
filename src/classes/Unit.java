@@ -132,4 +132,10 @@ public class Unit {
 	            && Objects.equals(defensiveShock, unit.defensiveShock);
 	}
 	
+	@Override
+	public int hashCode() {
+	    assert false : "hashCode not designed";
+	    return 42; // any arbitrary constant will do
+	}
+	
 }

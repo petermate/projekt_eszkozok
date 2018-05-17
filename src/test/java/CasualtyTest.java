@@ -59,7 +59,7 @@ public class CasualtyTest {
         String phase = "fire";
         Casualty instance = new Casualty(a,d,terrainMod);
         int expResult = 4;
-        int result = instance.DiceRoll(droll, phase);
+        int result = instance.diceRoll(droll, phase);
         assertEquals(expResult, result);
     }
     @Test
@@ -69,7 +69,7 @@ public class CasualtyTest {
         String phase = "shock";
         Casualty instance = new Casualty(a,d,terrainMod);
         int expResult = 50;
-        int result = instance.Casualties(droll, phase);
+        int result = instance.casualties(droll, phase);
         assertEquals(expResult, result);
     }
     @Test
@@ -78,7 +78,7 @@ public class CasualtyTest {
         int droll = 5;
         Casualty instance = new Casualty(a,d,terrainMod);
         int expResult = 54;
-        int result = instance.FirePhaseCasualties(droll);
+        int result = instance.firePhaseCasualties(droll);
         assertEquals(expResult, result);
     }
 
@@ -88,7 +88,7 @@ public class CasualtyTest {
         int droll = 5;
         Casualty instance = new Casualty(a,d,terrainMod);
         int expResult = 30;
-        int result = instance.ShockPhaseCasualties(droll);
+        int result = instance.shockPhaseCasualties(droll);
         assertEquals(expResult, result);
     }
 
@@ -98,7 +98,7 @@ public class CasualtyTest {
         int droll = 5;
         Casualty instance = new Casualty(a,d,terrainMod);;
         double expResult = 0.308;
-        double result = instance.FirePhaseMoraleDamage(droll);
+        double result = instance.firePhaseMoraleDamage(droll);
         assertEquals(expResult, result, 0.01);
     }
 
@@ -108,7 +108,7 @@ public class CasualtyTest {
         int droll = 5;
         Casualty instance = new Casualty(a,d,terrainMod);
         double expResult = 0.15;
-        double result = instance.ShockPhaseMoraleDamage(droll);
+        double result = instance.shockPhaseMoraleDamage(droll);
         assertEquals(expResult, result, 0.01);;
     }
 

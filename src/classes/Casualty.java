@@ -5,7 +5,7 @@ package classes;
  */
 public class Casualty {
     CombatUnit a, d; //attacker, defender
-    int droll, terrainMod; //diceroll, sum of all terrain based bonuses
+    int terrainMod; //diceroll (was unused -> delete for findbugs - PM), sum of all terrain based bonuses
     Leader la, ld; //general-attacking, general-defending
     public Casualty(CombatUnit a, CombatUnit d, int terrainMod){
         this.a=a;
@@ -14,7 +14,7 @@ public class Casualty {
         la=a.getLeader();
         ld=d.getLeader();
     }
-    public int DiceRoll(int droll, String phase){
+    public int diceRoll(int droll, String phase){
         int ret = 0;
         if (phase.equals("fire")) {
             ret = droll + la.getFire() + a.getOffensiveFire()
@@ -35,7 +35,7 @@ public class Casualty {
         if (ret<0) return 0;
         return ret;
     }
-    public int Casualties(int dresult, String phase){
+    public int casualties(int dresult, String phase){
         double ret = 0.0;
         if (phase.equals("fire")) {
             ret =  (15.0 + 5.0*dresult)*a.getStrength()*a.getFireMod()
@@ -51,20 +51,20 @@ public class Casualty {
         }
         return (int) Math.round(ret);
     }
-    public double MoraleDamage(int dresult, String phase){
-        return Casualties(dresult, phase)*a.getMaxMorale()/600;
+    public double moraleDamage(int dresult, String phase){
+        return casualties(dresult, phase)*a.getMaxMorale()/600;
     }
-    public int FirePhaseCasualties(int droll){
-        return Casualties(DiceRoll(droll,"fire"),"fire");
+    public int firePhaseCasualties(int droll){
+        return casualties(diceRoll(droll,"fire"),"fire");
     }
-    public int ShockPhaseCasualties(int droll){
-        return Casualties(DiceRoll(droll,"shock"),"shock");
+    public int shockPhaseCasualties(int droll){
+        return casualties(diceRoll(droll,"shock"),"shock");
     }
-    public double FirePhaseMoraleDamage(int droll){
-        return MoraleDamage(DiceRoll(droll,"moralefire"),"fire");
+    public double firePhaseMoraleDamage(int droll){
+        return moraleDamage(diceRoll(droll,"moralefire"),"fire");
     }
-    public double ShockPhaseMoraleDamage(int droll){
-        return MoraleDamage(DiceRoll(droll,"moraleshock"),"shock");
+    public double shockPhaseMoraleDamage(int droll){
+        return moraleDamage(diceRoll(droll,"moraleshock"),"shock");
     }
 }
 
