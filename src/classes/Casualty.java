@@ -5,7 +5,7 @@ package classes;
  */
 public class Casualty {
     CombatUnit a, d; //attacker, defender
-    int terrainMod; //diceroll (was unused -> delete for findbugs - PM), sum of all terrain based bonuses
+    int terrainMod; //sum of all terrain based bonuses
     Leader la, ld; //general-attacking, general-defending
     public Casualty(CombatUnit a, CombatUnit d, int terrainMod){
         this.a=a;

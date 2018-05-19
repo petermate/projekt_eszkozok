@@ -33,7 +33,8 @@ public class CasualtyTest {
                 0.0, //defensiveBonusFire
                 1.0, //infantryCombatAbility
                 0.0, //cavalryCombatAbility
-                0.0 //artilleryCombatAbility
+                0.0, //artilleryCombatAbility
+                0.0 //
         );
         tm = new TechnologyModifier();
         tm.setInfantryFire(0.25);

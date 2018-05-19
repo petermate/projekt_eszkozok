@@ -8,13 +8,13 @@ public class InputModifier {
     double morale, discipline, mercenaryDiscipline, flankingRange,
         offensiveBonusShock, offensiveBonusFire, defensiveBonusShock,
         defensiveBonusFire, infantryCombatAbility, cavalryCombatAbility,
-        artilleryCombatAbility;
+        artilleryCombatAbility, bonusCavalryToInfRatio;
     
     public InputModifier(double morale, double discipline, double mercenaryDiscipline,
             double flankingRange, double offensiveBonusShock, double offensiveBonusFire,
             double defensiveBonusShock, double defensiveBonusFire,
             double infantryCombatAbility, double cavalryCombatAbility,
-            double artilleryCombatAbility) {
+            double artilleryCombatAbility, double bonusCavalryToInfRatio) {
         this.morale = morale;
         this.discipline = discipline;
         this.mercenaryDiscipline = mercenaryDiscipline;
@@ -26,6 +26,22 @@ public class InputModifier {
         this.infantryCombatAbility = infantryCombatAbility;
         this.cavalryCombatAbility = cavalryCombatAbility;
         this.artilleryCombatAbility = artilleryCombatAbility;
+        this.bonusCavalryToInfRatio = bonusCavalryToInfRatio;
+    }
+    
+    public InputModifier(){
+        morale = 0;
+        discipline = 0;
+        mercenaryDiscipline = 0;
+        flankingRange = 0;
+        offensiveBonusShock = 0;
+        offensiveBonusFire = 0;
+        defensiveBonusShock = 0;
+        defensiveBonusFire = 0;
+        infantryCombatAbility = 0;
+        cavalryCombatAbility = 0;
+        artilleryCombatAbility = 0;
+        bonusCavalryToInfRatio = 0;
     }
     
     public double getMorale() {
@@ -87,7 +103,9 @@ public class InputModifier {
     public double getDefensiveBonusFire() {
         return defensiveBonusFire;
     }
-
+    public double getBonusCavalryToInfRatio(){
+        return bonusCavalryToInfRatio;
+    }
     public void setDefensiveBonusFire(double defensiveBonusFire) {
         this.defensiveBonusFire = defensiveBonusFire;
     }

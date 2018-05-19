@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class CombatSequence {
 
-	public Army attackerArmy;
-	public Army defenderArmy;
+	public Armyold attackerArmy;
+	public Armyold defenderArmy;
 	public String phase;
 	public int terrainMod;
 	
@@ -13,7 +13,7 @@ public class CombatSequence {
 	public int day;
 	
 	
-	public CombatSequence( Army attackerArmy, Army defenderArmy, int terrainMod) {
+	public CombatSequence( Armyold attackerArmy, Armyold defenderArmy, int terrainMod) {
 		
 		this.attackerArmy = attackerArmy;
 		this.defenderArmy = defenderArmy;
@@ -194,12 +194,12 @@ public class CombatSequence {
 	
 	// getter, setter
 	
-	public Army getAttackerArmy() {
+	public Armyold getAttackerArmy() {
 		
 		return attackerArmy;
 	}
 	
-	public Army getDefenderArmy() {
+	public Armyold getDefenderArmy() {
 		
 		return defenderArmy;
 	}
@@ -219,12 +219,12 @@ public class CombatSequence {
 		return terrainMod;
 	}	
 	
-	public void setAttackerArmy( Army attackerArmy ) {
+	public void setAttackerArmy( Armyold attackerArmy ) {
 		
 		this.attackerArmy = attackerArmy;
 	}
 	
-	public void setDefenderArmy( Army defenderArmy ) {
+	public void setDefenderArmy( Armyold defenderArmy ) {
 		
 		this.defenderArmy = defenderArmy;
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import classes.Army;
+import classes.Armyold;
 import classes.CombatSequence;
 import classes.CombatUnit;
 import classes.InputModifier;
@@ -26,8 +26,8 @@ public class StartGame {
 	//private int regiments2;
 	private int river;  	//folyó, lehet boolean is
 	private int terrainMod;
-	private Army army1;
-	private Army army2;
+	private Armyold army1;
+	private Armyold army2;
 	
 	/*
 	* elindítja a programot és bekéri a paramétereket a felhasználótól
@@ -109,7 +109,7 @@ public class StartGame {
 			System.out.print(i+1 + ". " + list1.get(i) + " | ");		//csakhogy 1-től induljon a számozás
 		}
 			
-		InputModifier im = new InputModifier(1,1,1,1,1,1,1,1,1,1,1); 	//dummy object for now
+		InputModifier im = new InputModifier(1,1,1,1,1,1,1,1,1,1,1,1); 	//dummy object for now
 		TechnologyModifier tm = new TechnologyModifier();
 		List<Unit> units1 = new ArrayList<>();	
 		boolean end = false;
@@ -269,8 +269,8 @@ public class StartGame {
 		}
 		
 				
-		army1 = new Army(leader1, 1, 1, userCombatUnits);  			// using dummy values for now
-		army2 = new Army(leader2, 1, 1, enemyCombatUnits);
+		army1 = new Armyold(leader1, 1, 1, userCombatUnits);  			// using dummy values for now
+		army2 = new Armyold(leader2, 1, 1, enemyCombatUnits);
 		
 		CombatSequence combat = new CombatSequence(army1, army2, terrainMod);
 		
@@ -325,11 +325,11 @@ public class StartGame {
 		return terrainMod;
 	}
 	
-	public Army getArmy1() {
+	public Armyold getArmy1() {
 		return army1;
 	}
 	
-	public Army getArmy2() {
+	public Armyold getArmy2() {
 		return army2;
 	}
 }
