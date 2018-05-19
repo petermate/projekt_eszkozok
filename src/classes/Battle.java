@@ -112,9 +112,11 @@ public class Battle {
 
             }
             if (this.isDefeated(attacker)) {
+                this.Results("attacker");
                 break;
             }
             if (this.isDefeated(defender)) {
+                this.Results("defender");
                 break;
             }
             if (day == 999) {
@@ -145,8 +147,46 @@ public class Battle {
         }
     }
 
-    void Results() {
-        //TODO: sendig  data to the UI;
+    void Results(String winner) {
+        this.Losses(attacker);
+        this.Losses(defender);
+
+        //TODO: Sending data back to the UI
+    }
+
+    void Losses(Army army) {
+        int deadinf = army.getNumOfRegInfantry() * 1000;
+        int deadminf = army.getNumOfMercInfantry() * 1000;
+        int deadcav = army.getNumOfRegCavalry() * 1000;
+        int deadmcav = army.getNumOfMercCavalry() * 1000;
+        int deadart = army.getNumOfRegArtillery() * 1000;
+        int deadmart = army.getNumOfMercArtillery() * 1000;
+        int manpowerloss = 0;
+        for (CombatUnit cu : army.getUnits()) {
+            if (cu.getType().equals(UnitType.INFANTRY) && !cu.isIsMercenary()) {
+                deadinf -= cu.getStrength();
+                manpowerloss += cu.getStrength();
+            }
+            if (cu.getType().equals(UnitType.INFANTRY) && cu.isIsMercenary()) {
+                deadminf -= cu.getStrength();
+            }
+            if (cu.getType().equals(UnitType.CAVALRY) && !cu.isIsMercenary()) {
+                deadcav -= cu.getStrength();
+                manpowerloss += cu.getStrength();
+            }
+            if (cu.getType().equals(UnitType.CAVALRY) && cu.isIsMercenary()) {
+                deadmcav -= cu.getStrength();
+            }
+            if (cu.getType().equals(UnitType.ARTILLERY) && !cu.isIsMercenary()) {
+                deadart -= cu.getStrength();
+                manpowerloss += cu.getStrength();
+            }
+            if (cu.getType().equals(UnitType.ARTILLERY) && cu.isIsMercenary()) {
+                deadmart -= cu.getStrength();
+            }
+        }
+
+        //TODO: Sending data back to the UI :
     }
 
     /**
@@ -161,7 +201,6 @@ public class Battle {
                 return false;
             }
         }
-        this.Results();
         return true;
     }
 
