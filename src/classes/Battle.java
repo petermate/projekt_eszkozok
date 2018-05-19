@@ -112,11 +112,11 @@ public class Battle {
 
             }
             if (this.isDefeated(attacker)) {
-                this.Results("attacker");
+                this.Results("defender");
                 break;
             }
             if (this.isDefeated(defender)) {
-                this.Results("defender");
+                this.Results("attacker");
                 break;
             }
             if (day == 999) {
