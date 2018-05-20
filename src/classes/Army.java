@@ -3,6 +3,9 @@ package classes;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents an army in the battle
+ */
 public class Army {
 	
 	public Leader leader;
@@ -28,7 +31,6 @@ public class Army {
 	public int numberOfRetreatingInfantryUnit;
 	public int numberOfRetreatingCavalryUnit;
 	public int numberOfRetreatingArtilleryUnit;
-	
 	
 	public Army( Leader leader, int combatWidth, int cavalryPositionValueInOneSide, ArrayList<CombatUnit> units) {
 		
@@ -79,6 +81,9 @@ public class Army {
 		
 	}
 	
+	/**
+	 * Splits the units into the 3 base types
+	 */
 	public void splitUnits( ArrayList<CombatUnit> units ) {
 		
 		
@@ -100,6 +105,9 @@ public class Army {
 		
 	}
 	
+	/**
+	 * checks whether a unit is ready to fall back.
+	 */
 	public void checkMoral( ArrayList<CombatUnit> units )  {
 		
 		ArrayList<CombatUnit> unitsToRemove= new ArrayList<CombatUnit>();
@@ -131,7 +139,9 @@ public class Army {
 	}	
 	
 	
-	
+	/**
+	 * Deploys the units at their starting position
+	 */
 	public void deployUnitsToStartingPosition() {
 		
 		// first row
@@ -152,7 +162,9 @@ public class Army {
 		setNumberOfSpareUnit( ( unitsOfCavalry.size() + unitsOfArtillery.size() + unitsOfInfantry.size() ) );
 	}	
 	
-	
+	/**
+	 * Sets the battlefield
+	 */
 	public void setRow( CombatUnit[] row, int index ) {
 		
 				
@@ -208,7 +220,9 @@ public class Army {
 		
 	}
 	
-		
+	/**
+	 * If a unit falls back another gets in their way.
+	 */
 	public void getNewUnitForPosition( CombatUnit unit ) {
 		
 				
@@ -285,7 +299,10 @@ public class Army {
 		
 		setNumberOfSpareUnit( ( unitsOfCavalry.size() + unitsOfArtillery.size() + unitsOfInfantry.size() ) );
 	}
-		
+	
+	/**
+	 * Switch position between units
+	 */
 	public void switchPositions() {
 		
 		for( int indexRow=0; indexRow < combatWidth; indexRow++) {

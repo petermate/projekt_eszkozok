@@ -2,6 +2,9 @@ package classes;
 
 import java.util.Objects;
 
+/**
+ * Constants to modify the armies based on MIT
+ */
 public class TechnologyModifier {
   
   public double morale;

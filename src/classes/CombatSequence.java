@@ -2,6 +2,9 @@ package classes;
 
 import java.util.Random;
 
+/**
+ * A class to simulate a battle.
+ */
 public class CombatSequence {
 
 	public Army attackerArmy;
@@ -27,7 +30,9 @@ public class CombatSequence {
 	}
 	
 	
-		
+	/**
+	 * Change the phase between fire and shock	
+	 */
 	public void changePhase() {
 		
 		if ( phase.equals("fire") ) {
@@ -40,6 +45,9 @@ public class CombatSequence {
 		}
 	}
 	
+	/**
+	 * The battle itself
+	 */
 	public void battle() {
 		
 		while ( !isBattleFinished() ) {
@@ -67,6 +75,9 @@ public class CombatSequence {
 		
 	}
 	
+	/**
+	 * Attack with an army
+	 */
 	public void attack() {
 		
 		Casualty firstRowAttack;
@@ -85,7 +96,6 @@ public class CombatSequence {
 				
 		for( int index=0; index < attackerArmy.combatWidth ; index ++) {
 		    
-		    //Ezek mindig 0-ák voltak, majd szoroztunk velük, kérlek nézzétek meg hol kéne beállítódniuk.
 		    attackerArmy.firstRow[index].setFireMod(0.25);
 		    attackerArmy.firstRow[index].setShockMod(0.25);
 		    defenderArmy.firstRow[index].setFireMod(0.1);
@@ -97,10 +107,8 @@ public class CombatSequence {
 		    
 			firstRowAttack = new Casualty( attackerArmy.firstRow[index], defenderArmy.firstRow[index], terrainMod );
 			int defCasualty = firstRowAttack.casualties( firstRowAttack.diceRoll( diceRoll, phase ), phase );
-			//Honnan kéne kitalálni, hogy a casualty melyik egység típusra érkezett? Infantry, cavalry vagy artillery?
 			this.defenderArmy.setNumberOfDeadInfantryUnit(defCasualty);
-			//Ide nem kéne morale veszteség is valahova? Hogy mert a harc során a morale sosem változik
-			
+					
 			firstRowAttack = new Casualty( defenderArmy.firstRow[index], attackerArmy.firstRow[index], terrainMod );
 			int attackerCasualty = firstRowAttack.casualties( firstRowAttack.diceRoll( diceRoll, phase ), phase );			
 			this.attackerArmy.setNumberOfDeadInfantryUnit(attackerCasualty);
@@ -124,6 +132,9 @@ public class CombatSequence {
 		
 	}
 	
+	/**
+	 * Checks if the battle is over
+	 */
 	public boolean isBattleFinished() {
 		
 		int numberOfDeadUnitsInAttackerArmy = attackerArmy.numberOfDeadArtilleryUnit + attackerArmy.numberOfDeadInfantryUnit + attackerArmy.numberOfDeadCavalryUnit;
@@ -147,6 +158,9 @@ public class CombatSequence {
 		return false;				
 	}
 	
+	/**
+	 * Writes the results to the console.
+	 */
 	public void result() {
 		
 		System.out.println("Napok száma " + day );
@@ -161,12 +175,12 @@ public class CombatSequence {
 			System.out.println("Vesztes");
 		}
 		
-		System.out.println( "Halott gyalogság: " + attackerArmy.getNumberOfDeadInfantryUnit() );
-		System.out.println( "Halott lovasság: " + attackerArmy.getNumberOfDeadCavalryUnit() );
+		System.out.println( "Halott katonák: " + attackerArmy.getNumberOfDeadInfantryUnit() );
+		/*System.out.println( "Halott lovasság: " + attackerArmy.getNumberOfDeadCavalryUnit() );
 		System.out.println( "Halott tüzérség: " + attackerArmy.getNumberOfDeadArtilleryUnit() );
 		System.out.println( "Megfutamodott gyalogság: " + attackerArmy.getNumberOfRetreatingInfantryUnit() );
 		System.out.println( "Megfutamodott lovasság: " + attackerArmy.getNumberOfRetreatingCavalryUnit() );
-		System.out.println( "Megfutamodott tüzérség: " + attackerArmy.getNumberOfRetreatingArtilleryUnit() );
+		System.out.println( "Megfutamodott tüzérség: " + attackerArmy.getNumberOfRetreatingArtilleryUnit() );*/
 		
 		
 		
@@ -179,12 +193,12 @@ public class CombatSequence {
 			System.out.println("Vesztes");
 		}
 		
-		System.out.println( "Halott gyalogság: " + defenderArmy.getNumberOfDeadInfantryUnit() );
-		System.out.println( "Halott lovasság: " + defenderArmy.getNumberOfDeadCavalryUnit() );
+		System.out.println( "Halott katonák: " + defenderArmy.getNumberOfDeadInfantryUnit() );
+		/*System.out.println( "Halott lovasság: " + defenderArmy.getNumberOfDeadCavalryUnit() );
 		System.out.println( "Halott tüzérség: " + defenderArmy.getNumberOfDeadArtilleryUnit() );
 		System.out.println( "Megfutamodott gyalogság: " + defenderArmy.getNumberOfRetreatingInfantryUnit() );
 		System.out.println( "Megfutamodott lovasság: " + defenderArmy.getNumberOfRetreatingCavalryUnit() );
-		System.out.println( "Megfutamodott tüzérség: " + defenderArmy.getNumberOfRetreatingArtilleryUnit() );
+		System.out.println( "Megfutamodott tüzérség: " + defenderArmy.getNumberOfRetreatingArtilleryUnit() );*/
 		
 		
 		

@@ -1,5 +1,8 @@
 package classes;
 
+/**
+ * A leader to lead the army
+ */
 public class Leader {
     int fire, shock, man;
     public Leader(int fire, int shock, int man){

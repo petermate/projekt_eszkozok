@@ -2,6 +2,9 @@ package classes;
 
 import java.util.Objects;
 
+/**
+ * A class to represent one unit in the army
+ */
 public class Unit {
 
 	private String militaryGroup; 	//földrajzi elhelyezkedés

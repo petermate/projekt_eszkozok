@@ -13,6 +13,9 @@ import classes.Unit;
 import classes.UnitType;
 import test.java.GetFileContentTest;
 
+/**
+ * A játék által adott fájlok beolvasására használt osztály.
+ */
 public class EU4FileReader {
 	
 	/**
