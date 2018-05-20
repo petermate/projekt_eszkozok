@@ -21,6 +21,7 @@ Fejlesztés alatt. More features to come!
 
 ## Felhasználói dokumentáció:
 1. A repository klónozása
-2. A projekt betöltése egy fejlesztői környezetbe.
-3. EU4 fő osztály futtatása
-4. Konzolos utasítások követése.
+2. Főkönyvtárban lévő `EU4_Szimulator-0.0.1-SNAPSHOT.jar` futtatása konzolból.
+  * `java -jar EU4_Szimulator-0.0.1-SNAPSHOT.jar` (ha jdk1.8 van konfigurálva PATH-ra)
+  * Ha ez nem megy, akkor egy fejlesztői környezetben lehet megnyitni, ahol az EU4 főosztály-t lehet futtatni.
+3. Konzolos utasítások követése.
