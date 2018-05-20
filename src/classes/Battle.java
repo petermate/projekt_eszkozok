@@ -59,10 +59,8 @@ public class Battle {
             this.CoveringFire(attacker);
             this.CoveringFire(defender);
             this.toConsole();
-
             this.Losses(attacker);
             this.Losses(defender);
-
             this.Combat(attacker, defender, phase, attackerdice, 1,
                     receivedCasualtiesDefender, receivedMoraleDamageDefender, terrainMod);
             this.Combat(attacker, defender, phase, attackerdice, 2,
@@ -210,6 +208,7 @@ public class Battle {
      * @param army
      */
     void fill(Army army) {
+        try{
         for (int i = 0; i < army.getTm().getCombatWidth(); i++) {
             if (army.getSecondRow()[i] != null && army.getFirstRow()[i] == null) {
                 if (army.getSecondRow()[i].getType().equals(UnitType.ARTILLERY)) {
@@ -272,6 +271,9 @@ public class Battle {
                     }
                 }
             }
+        }
+        }catch(java.lang.ArrayIndexOutOfBoundsException e){
+            //ignore
         }
 
     }
@@ -435,7 +437,7 @@ public class Battle {
         int minfindex = 0;
         int mcavindex = 0;
         int martindex = 0;
-        if (army.getNumOfInfantry() < cw) {;
+        if (army.getNumOfInfantry() < cw) {
             for (int i = 0; i < army.getNumOfMercInfantry(); i++) {
                 frshift = Deploy(army.getMinf()[i], army.getFirstRow(), center, frshift);
                 minfindex = i;
@@ -516,7 +518,7 @@ public class Battle {
                     break;
                 }
                 frshift = Deploy(army.getMinf()[i], army.getFirstRow(), center, frshift);
-                minfindex = i;
+                minfindex++;
             }
 
             for (int i = 0; i < army.getNumOfRegInfantry(); i++) {
@@ -524,14 +526,14 @@ public class Battle {
                     break;
                 }
                 frshift = Deploy(army.getInf()[i], army.getFirstRow(), center, frshift);
-                infindex = i;
+                infindex++;
             }
             for (int i = 0; i < army.getNumOfMercCavalry(); i++) {
                 if (frshift + center < 0 || frshift + center > (cw - 1)) {
                     break;
                 }
                 frshift = Deploy(army.getMcav()[i], army.getFirstRow(), center, frshift);
-                mcavindex = i;
+                mcavindex++;
             }
 
             for (int i = 0; i < army.getNumOfRegCavalry(); i++) {
@@ -539,35 +541,35 @@ public class Battle {
                     break;
                 }
                 frshift = Deploy(army.getCav()[i], army.getFirstRow(), center, frshift);
-                cavindex = i;
+                cavindex++;
             }
             for (int i = 0; i < army.getNumOfMercArtillery(); i++) {
                 if (srshift + center < 0 || srshift + center > (cw - 1)) {
                     break;
                 }
                 srshift = Deploy(army.getMart()[i], army.getSecondRow(), center, srshift);
-                martindex = i;
+                martindex++;
             }
             for (int i = 0; i < army.getNumOfRegArtillery(); i++) {
                 if (srshift + center < 0 || srshift + center > (cw - 1)) {
                     break;
                 }
                 srshift = Deploy(army.getArt()[i], army.getSecondRow(), center, srshift);
-                artindex = i;
+                artindex++;
             }
             for (int i = minfindex; i < army.getNumOfMercInfantry(); i++) {
                 if (srshift + center < 0 || srshift + center > (cw - 1)) {
                     break;
                 }
                 srshift = Deploy(army.getMinf()[i], army.getSecondRow(), center, srshift);
-                minfindex = i;
+                minfindex++;
             }
             for (int i = infindex; i < army.getNumOfRegInfantry(); i++) {
                 if (srshift + center < 0 || srshift + center > (cw - 1)) {
                     break;
                 }
                 srshift = Deploy(army.getInf()[i], army.getSecondRow(), center, srshift);
-                infindex = i;
+                infindex++;
             }
 
             for (int i = mcavindex; i < army.getNumOfMercCavalry(); i++) {
@@ -575,14 +577,14 @@ public class Battle {
                     break;
                 }
                 srshift = Deploy(army.getMcav()[i], army.getSecondRow(), center, srshift);
-                mcavindex = i;
+                mcavindex++;
             }
             for (int i = cavindex; i < army.getNumOfRegCavalry(); i++) {
                 if (srshift + center < 0 || srshift + center > (cw - 1)) {
                     break;
                 }
                 srshift = Deploy(army.getCav()[i], army.getSecondRow(), center, srshift);
-                cavindex = i;
+                cavindex++;
             }
         }
         for (int i = minfindex; i < army.getNumOfMercInfantry(); i++) {
