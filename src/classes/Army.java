@@ -18,7 +18,7 @@ public class Army {
     CombatUnit[] firstRow, secondRow;
     List<CombatUnit> reserve, retreated;
 
-    public Army(int fire, int shock, int maneuver, Unit infantry, String mg,
+    public Army(int fire, int shock, int maneuver, String mg, Unit infantry,
             Unit cavalry, Unit artillery, int numOfRegInfantry, int numOfRegCavalry,
             int numOfRegArtillery, int numOfMercInfantry, int numOfMercCavalry,
             int numOfMercArtillery, InputModifier im, TechnologyModifier tm) {
@@ -29,13 +29,19 @@ public class Army {
         this.im = im;
         this.tm = tm;
         this.mg = mg;
-        inf = new CombatUnit[numOfInfantry];
-        cav = new CombatUnit[numOfCavalry];
-        art = new CombatUnit[numOfArtillery];
+        inf = new CombatUnit[numOfRegInfantry];
+        cav = new CombatUnit[numOfRegCavalry];
+        art = new CombatUnit[numOfRegArtillery];
         minf = new CombatUnit[numOfMercInfantry];
         mcav = new CombatUnit[numOfMercCavalry];
         mart = new CombatUnit[numOfMercArtillery];
-        numOfUnits = numOfInfantry + numOfCavalry + numOfArtillery
+        this.numOfMercInfantry = numOfMercInfantry;
+        this.numOfMercCavalry = numOfMercCavalry;
+        this.numOfMercArtillery = numOfMercArtillery;
+        this.numOfRegInfantry = numOfRegInfantry;
+        this.numOfRegCavalry = numOfRegCavalry;
+        this.numOfRegArtillery = numOfRegArtillery;
+        this.numOfUnits = numOfRegInfantry + numOfRegCavalry + numOfRegArtillery
                 + numOfMercInfantry + numOfMercCavalry + numOfMercArtillery;
         numOfInfantry = numOfRegInfantry + numOfMercInfantry;
         numOfCavalry = numOfRegCavalry + numOfMercCavalry;
@@ -45,39 +51,31 @@ public class Army {
         secondRow = new CombatUnit[tm.getCombatWidth()];
         reserve = new ArrayList<>();
         retreated = new ArrayList<>();
-        this.init();
 
-    }
-    
-    private void init() {
         int index = 0;
         for (int i = 0; i < numOfRegInfantry; i++, index++) {
             inf[i] = new CombatUnit(infantry, tm, im, leader, false);
             units[index] = inf[i];
         }
-        index++;
+
         for (int i = 0; i < numOfRegCavalry; i++, index++) {
             cav[i] = new CombatUnit(cavalry, tm, im, leader, false);
             units[index] = cav[i];
         }
-        index++;
         for (int i = 0; i < numOfRegArtillery; i++, index++) {
             art[i] = new CombatUnit(artillery, tm, im, leader, false);
             units[index] = art[i];
         }
-        index++;
         for (int i = 0; i < numOfMercInfantry; i++, index++) {
-            inf[i] = new CombatUnit(infantry, tm, im, leader, true);
+            minf[i] = new CombatUnit(infantry, tm, im, leader, true);
             units[index] = minf[i];
         }
-        index++;
         for (int i = 0; i < numOfMercCavalry; i++, index++) {
-            cav[i] = new CombatUnit(cavalry, tm, im, leader, true);
-            units[index] = mcav[i];
+            mcav[i] = new CombatUnit(cavalry, tm, im, leader, true);
+            units[index] = mcav[i];;
         }
-        index++;
         for (int i = 0; i < numOfMercArtillery; i++, index++) {
-            art[i] = new CombatUnit(artillery, tm, im, leader, true);
+            mart[i] = new CombatUnit(artillery, tm, im, leader, true);
             units[index] = mart[i];
         }
     }

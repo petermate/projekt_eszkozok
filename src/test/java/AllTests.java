@@ -11,7 +11,7 @@ import test.java.GetUnlockedUnitsTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({GetUnitWithAttributesTest.class, GetFileContentTest.class, ListFilesForFolderTest.class, GetUnlockedUnitsTest.class,
-                CasualtyTest.class, CombatUnitTest.class})
+                CasualtyTest.class, CombatUnitTest.class, ArmyTest.class, BattleTest.class})
 public class AllTests {
 
 }

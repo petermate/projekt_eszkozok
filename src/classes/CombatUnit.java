@@ -46,6 +46,9 @@ public class CombatUnit {
         if (isMercenary) {
             discipline += im.getMercenaryDiscipline();
         }
+        if (discipline<0.5) {
+            discipline = 0.5;
+        }
         tactics = tm.getTactics() * discipline;
         type = u.getType();
         if (type.equals(UnitType.INFANTRY)) {
